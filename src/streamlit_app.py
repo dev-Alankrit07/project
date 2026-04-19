@@ -1,8 +1,14 @@
 import os
+import sys
 import tempfile
 import joblib
 import pandas as pd
 import streamlit as st
+
+# 🔥 FIX for Streamlit Cloud import issues
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+if CURRENT_DIR not in sys.path:
+    sys.path.append(CURRENT_DIR)
 
 from parser import extract_resume_text
 from scorer import calculate_resume_score
@@ -126,7 +132,8 @@ if st.button("Analyze Resumes"):
                     "Confidence": r["confidence"]
                 })
 
-            st.dataframe(pd.DataFrame(table_data), use_container_width=True)
+            # 🔥 FIX WARNING HERE
+            st.dataframe(pd.DataFrame(table_data), width="stretch")
 
             best = results[0]
             st.success(
@@ -151,4 +158,4 @@ if st.button("Analyze Resumes"):
                     st.write(f"**Reason:** {r['reason']}")
 
 if model is None:
-    st.info("model.pkl not found. Run: python src\\train_model.py")
+    st.warning("model.pkl not found. Make sure it is uploaded to GitHub.")
