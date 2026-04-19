@@ -1,0 +1,14 @@
+We are hiring a Python Developer.
+
+Required skills:
+Python
+SQL
+Flask
+Machine Learning
+Git
+
+Required qualification:
+Bachelor degree in Computer Science or related field
+
+Required experience:
+2 years experience
